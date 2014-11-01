@@ -4,11 +4,11 @@
         <title>Flickr Gallary</title>
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/loader.css">
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
     </head>
     <body>
-        <script src="js/vendor/jquery-1.10.2.min.js"></script>
-        <script src="js/main.js"></script>
-        <div class="windows8">
+
+        <div class="loader">
             <div class="wBall" id="wBall_1">
                 <div class="wInnerBall">
                 </div>
@@ -31,21 +31,20 @@
             </div>
         </div>
         <div class="container">
-
-
-
             <h3>Galleries</h3>
 
             <div class="edit-block">
                 <div class="error">Please enter the tag</div>
                 <input type="text" placeholder="Tag">
-                <button type="button">Add</button>
-                <a href="">Remove all</a>
-                <ul>
+                <button id="add-button" type="button">Add</button>
+                <a href="#" class="remove-all">Remove all</a>
+                <ul class="list">
 
                 </ul>
             </div>
         </div>
 
+
+        <script src="js/main.js"></script>
     </body>
 </html>

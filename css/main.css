@@ -27,7 +27,7 @@ body{
     color: red;
 }
 
-.edit-block a{
+.edit-block .remove-all{
     float: right;
 }
 
