@@ -35,3 +35,20 @@ body{
     width: 178px;
     margin: 10px;
 }
+
+.sorting-block{
+    float: right;
+    display: inline;
+}
+
+.date-info {
+    position: absolute;
+    display: inline-block;
+    background-color: rgba(255,255,255,0.8);
+    margin-left: 26px;
+    margin-top: 11px;
+}
+
+.date-info:first-child{
+    margin-top: 30px;
+}

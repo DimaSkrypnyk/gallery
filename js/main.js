@@ -29,11 +29,16 @@ var s,
             });
 
             s.addButton.on('click', function() {
-                FlickrGallery.addGallery(s.imagesPerGallery, s.input.val());
+                FlickrGallery.addGallery(s.input.val());
+            });
+
+            $('body').on('click', '.sorting-block a',  function(event){
+                event.preventDefault();
+                FlickrGallery.sortImages($(this).attr('class'), $(this).closest('.gallery').attr('data-tag'));
             });
         },
 
-        addGallery: function(imagesPerGallery, tag) {
+        addGallery: function(tag) {
             var imgDiv;
             s.input.val('');
 
@@ -48,7 +53,7 @@ var s,
             $('.loader').show();
             s.container.hide();
 
-            s.container.append('<div class="gallery" data-tag="' + tag + '"><h3>tag: ' + tag + '</h3></div>');
+            s.container.append('<div class="gallery" data-tag="' + tag + '"><div><span>tag: ' + tag + '</span><div class="sorting-block">Sort by: <a href="#" class="published">date published</a>&nbsp;&nbsp;<a href="#" class="taken">date taken</a></div></div></div>');
             s.list.append('<li data-tag="' + tag + '">' + tag + '&nbsp;&nbsp;<a href="#" class="remove-one">Remove</a></li>');
 
             imgDiv = '';
@@ -64,7 +69,7 @@ var s,
 
                     $.each(data.items, function (i, item) {
                         if (i == s.imagesPerGallery) return false;
-                        imgDiv += '<a href=' + item.link + ' target="_blank"><img data-tag="' + tag + ' "src="' + item.media.m + '" /></a>';
+                        imgDiv += '<a href=' + item.link + ' target="_blank" data-published=' + item.published.split('T')[0] + ' data-taken=' + item.date_taken.split('T')[0] + '><div class="date-info">'+item.date_taken.split('T')[0]+' - taken'+ '</div><div class="date-info">'+item.published.split('T')[0]+' - published'+'</div>'+'<img data-tag="' + tag + ' "src="' + item.media.m + '" /></a>';
                     });
 
                     $('.gallery[data-tag=' + tag + ']').append(imgDiv);
@@ -74,8 +79,40 @@ var s,
                 });
 
         },
+
         removeGallery: function(tag) {
             $('.gallery[data-tag=' + tag + ']').add('.list li[data-tag=' + tag + ']').remove()
+        },
+
+        sortImages: function(sortType, tag) {
+            var html;
+            html = '';
+            var arr = [];
+            $('.gallery[data-tag=' + tag + '] > a').each(function() {
+                var obj = {},
+                    $el = $(this),
+                    time = $el.attr('data-' + sortType),
+                    date = new Date( $.trim(time) ),
+                    timestamp = date.getTime();
+
+                obj.html = $el[0].outerHTML;
+                obj.time = timestamp;
+
+                arr.push(obj);
+            });
+
+            var sorted = arr.sort(function( a, b ) {
+                return a.time > b.time;
+            });
+
+            for( var i = 0; i < sorted.length; ++i ) {
+                html += sorted[i].html;
+            }
+            $('.gallery[data-tag=' + tag + '] > a').remove();
+            $('.gallery[data-tag=' + tag + ']').append(html);
+
+
+
         }
     };
 
