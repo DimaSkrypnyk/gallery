@@ -24,7 +24,7 @@ var s,
                 $('.gallery').add('.list li').remove();
             });
 
-            $('body').on('click', '.remove-one',  function(){
+            s.container.on('click', '.remove-one',  function(){
                 FlickrGallery.removeGallery($(this).closest('li').attr('data-tag'));
             });
 
@@ -32,7 +32,7 @@ var s,
                 FlickrGallery.addGallery(s.input.val());
             });
 
-            $('body').on('click', '.sorting-block a',  function(event){
+            s.container.on('click', '.sorting-block a',  function(event){
                 event.preventDefault();
                 FlickrGallery.sortImages($(this).attr('class'), $(this).closest('.gallery').attr('data-tag'));
             });
@@ -92,7 +92,7 @@ var s,
                 var obj = {},
                     $el = $(this),
                     time = $el.attr('data-' + sortType),
-                    date = new Date( $.trim(time) ),
+                    date = new Date($.trim(time)),
                     timestamp = date.getTime();
 
                 obj.html = $el[0].outerHTML;
@@ -110,8 +110,6 @@ var s,
             }
             $('.gallery[data-tag=' + tag + '] > a').remove();
             $('.gallery[data-tag=' + tag + ']').append(html);
-
-
 
         }
     };
