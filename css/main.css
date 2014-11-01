@@ -1,0 +1,37 @@
+body{
+    width: 1200px;
+    margin: 0 auto;
+    background-color: #F5F5F5;
+    padding: 20px;
+}
+.container{
+    width: 800px;
+    margin: 0 auto;
+    background-color: #F5F5F5;
+}
+
+.container h3{
+    margin-top: 0px;
+}
+
+.gallery, .edit-block{
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 6px gray;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.error{
+    display: none;
+    color: red;
+}
+
+.edit-block a{
+    float: right;
+}
+
+.gallery img{
+    width: 178px;
+    margin: 10px;
+}
